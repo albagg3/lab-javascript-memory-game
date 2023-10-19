@@ -45,7 +45,37 @@ window.addEventListener('load', (event) => {
   document.querySelectorAll('.card').forEach((card) => {
     card.addEventListener('click', () => {
       // TODO: write some code here
+      console.log(card)
+      if(card.className === "card")
+      {
+        console.log("entro");
+        card.className ="card turned"
+      }
+      
+      console.log(memoryGame.pickedCards.push(card));
+      console.log("comparacion",memoryGame.pickedCards[0].getAttribute('data-card-name'),memoryGame.pickedCards[1].getAttribute('data-card-name'))
+      const isPair = memoryGame.checkIfPair(memoryGame.pickedCards[0].getAttribute('data-card-name'),memoryGame.pickedCards[1].getAttribute('data-card-name'))
+      const pairClicked = document.querySelector("#pairs-clicked")
+      const pairGuessed = document.querySelector("#pairs-guessed")
+      pairClicked.innerText = memoryGame.pairsClicked
+      pairGuessed.innerText = parseInt(memoryGame.pairsGuessed/2)
+      console.log(isPair);
+      if(memoryGame.pickedCards.length === 3)
+      {
+        if(!isPair)
+        {
+          memoryGame.pickedCards[0].className = "card"
+          memoryGame.pickedCards[1].className = "card"
+        }
+        memoryGame.pickedCards.shift(memoryGame.pickedCards[0])
+        memoryGame.pickedCards.shift(memoryGame.pickedCards[0])
+        atributes.shift(atributes[0]);
+        atributes.shift(atributes[0]);
+      }
       console.log(`Card clicked: ${card}`);
     });
+    // card.classList.toggle('turned');
+    
   });
+  
 });
