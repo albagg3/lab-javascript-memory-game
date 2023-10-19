@@ -52,14 +52,14 @@ window.addEventListener('load', (event) => {
         card.className ="card turned"
       }
       
-      console.log(memoryGame.pickedCards.push(card));
+      memoryGame.pickedCards.push(card);
       console.log("comparacion",memoryGame.pickedCards[0].getAttribute('data-card-name'),memoryGame.pickedCards[1].getAttribute('data-card-name'))
       const isPair = memoryGame.checkIfPair(memoryGame.pickedCards[0].getAttribute('data-card-name'),memoryGame.pickedCards[1].getAttribute('data-card-name'))
+      console.log(isPair);
       const pairClicked = document.querySelector("#pairs-clicked")
       const pairGuessed = document.querySelector("#pairs-guessed")
-      pairClicked.innerText = memoryGame.pairsClicked
-      pairGuessed.innerText = parseInt(memoryGame.pairsGuessed/2)
-      console.log(isPair);
+      pairClicked.innerText = memoryGame.pairsClicked + 1
+      pairGuessed.innerText = memoryGame.pairsGuessed
       if(memoryGame.pickedCards.length === 3)
       {
         if(!isPair)
@@ -73,6 +73,9 @@ window.addEventListener('load', (event) => {
         atributes.shift(atributes[0]);
       }
       console.log(`Card clicked: ${card}`);
+      if(memoryGame.checkIfFinished()){
+        alert("Congrats!!! you won")
+      }
     });
     // card.classList.toggle('turned');
     
